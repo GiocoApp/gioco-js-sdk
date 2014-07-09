@@ -19,15 +19,22 @@ Gioco = (function() {
     return this.sendRequest(params, aid, 'get');
   };
 
-  Gioco.prototype.addBagde = function(name, aid) {
-    var params;
+  Gioco.prototype.addBagde = function(name, aid, badge_url) {
+    var data, params;
+    if (badge_url == null) {
+      badge_url = false;
+    }
+    data = {
+      badge: {
+        name: name
+      }
+    };
+    if (badge_url) {
+      data.badge.remote_image_url = badge_url;
+    }
     params = {
       url: '/resource/add_badge.json',
-      data: {
-        badge: {
-          name: name
-        }
-      }
+      data: data
     };
     return this.sendRequest(params, aid, 'post');
   };
@@ -50,10 +57,12 @@ Gioco = (function() {
     params = {
       url: '/resource/add_points.json',
       data: {
-        points: points
+        points: {
+          points: points
+        }
       }
     };
-    return this.sendRequest(params, aid, post);
+    return this.sendRequest(params, aid, 'post');
   };
 
   Gioco.prototype.removePoints = function(points, aid) {
@@ -61,7 +70,9 @@ Gioco = (function() {
     params = {
       url: '/resource/remove_points.json',
       data: {
-        points: points
+        points: {
+          points: points
+        }
       }
     };
     return this.sendRequest(params, aid, 'delete');
@@ -72,10 +83,12 @@ Gioco = (function() {
     params = {
       url: '/resource/add_level.json',
       data: {
-        levels: levels
+        levels: {
+          levels: levels
+        }
       }
     };
-    return this.sendRequest(params, aid('post'));
+    return this.sendRequest(params, aid, 'post');
   };
 
   Gioco.prototype.removeLevel = function(levels, aid) {
@@ -83,7 +96,9 @@ Gioco = (function() {
     params = {
       url: '/resource/remove_level.json',
       data: {
-        levels: levels
+        levels: {
+          levels: levels
+        }
       }
     };
     return this.sendRequest(params, aid, 'delete');

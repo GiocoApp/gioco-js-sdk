@@ -10,10 +10,12 @@ class Gioco
       url: '/resource/get_resource.json',
     @sendRequest(params, aid, 'get')
 
-  addBagde: (name, aid) ->
+  addBagde: (name, aid, badge_url = false) ->
+    data = {badge:{name:name}}
+    data.badge.remote_image_url = badge_url if badge_url
     params =
       url: '/resource/add_badge.json',
-      data: {badge:{name:name}}
+      data: data
     @sendRequest(params, aid, 'post')
 
   removeBagde: (name, aid) ->
@@ -25,25 +27,25 @@ class Gioco
   addPoints: (points, aid) ->
     params =
       url: '/resource/add_points.json',
-      data: {points:points}
-    @sendRequest(params, aid, post)
+      data: {points:{points:points}}
+    @sendRequest(params, aid, 'post')
 
   removePoints: (points, aid) ->
     params =
       url: '/resource/remove_points.json',
-      data: {points:points}
+      data: {points:{points:points}}
     @sendRequest(params, aid, 'delete')
 
   addLevel: (levels, aid) ->
     params =
       url: '/resource/add_level.json',
-      data: {levels:levels}
-    @sendRequest(params, aid 'post')
+      data: {levels:{levels: levels}}
+    @sendRequest(params, aid, 'post')
 
   removeLevel: (levels, aid) ->
     params =
       url: '/resource/remove_level.json',
-      data: {levels:levels}
+      data: {levels:{levels: levels}}
     @sendRequest(params, aid, 'delete')
 
   mountResourceRequest: (data, aid) ->
