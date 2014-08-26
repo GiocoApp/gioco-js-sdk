@@ -4,7 +4,7 @@ var Gioco;
 Gioco = (function() {
   function Gioco(token) {
     this.options = {
-      url: 'http://app.gioco.pro/api',
+      url: 'http://localhost:3000/api/',
       headers: {
         token: token
       }
@@ -14,94 +14,23 @@ Gioco = (function() {
   Gioco.prototype.getResource = function(aid) {
     var params;
     params = {
-      url: '/resource/get_resource.json'
+      url: 'get_resource.json'
     };
     return this.sendRequest(params, aid, 'get');
   };
 
-  Gioco.prototype.addBagde = function(name, aid, badge_url) {
+  Gioco.prototype.trackEvent = function(name, aid) {
     var data, params;
-    if (badge_url == null) {
-      badge_url = false;
-    }
     data = {
-      badge: {
+      event: {
         name: name
       }
     };
-    if (badge_url) {
-      data.badge.remote_image_url = badge_url;
-    }
     params = {
-      url: '/resource/add_badge.json',
+      url: 'track_event.json',
       data: data
     };
     return this.sendRequest(params, aid, 'post');
-  };
-
-  Gioco.prototype.removeBagde = function(name, aid) {
-    var params;
-    params = {
-      url: '/resource/remove_badge.json',
-      data: {
-        badge: {
-          name: name
-        }
-      }
-    };
-    return this.sendRequest(params, aid, 'delete');
-  };
-
-  Gioco.prototype.addPoints = function(points, aid) {
-    var params;
-    params = {
-      url: '/resource/add_points.json',
-      data: {
-        points: {
-          points: points
-        }
-      }
-    };
-    return this.sendRequest(params, aid, 'post');
-  };
-
-  Gioco.prototype.removePoints = function(points, aid) {
-    var params;
-    params = {
-      url: '/resource/remove_points.json',
-      data: {
-        points: {
-          points: points
-        }
-      }
-    };
-    return this.sendRequest(params, aid, 'delete');
-  };
-
-  Gioco.prototype.addLevel = function(levels, aid) {
-    var params;
-    params = {
-      url: '/resource/add_level.json',
-      data: {
-        levels: {
-          levels: levels
-        }
-      }
-    };
-    return this.sendRequest(params, aid, 'post');
-  };
-
-  Gioco.prototype.removeLevel = function(levels, aid) {
-    var params;
-    params = {
-      url: '/resource/remove_level.json',
-      data: {
-        levels: {
-          levels: levels
-        }
-      }
-    };
-    return this.sendRequest(params, aid, 'delete');
   };
 
   Gioco.prototype.mountResourceRequest = function(data, aid) {
