@@ -17,6 +17,10 @@ A easy way to implement gamification based on plug and play concept. Doesn't mat
 
 # Usage
 
+## You can already access your dashboard at [Gioco Pro](http://app.gioco.pro) and start to setup you application. It has it's own tutorial and is quite simple!
+
+### After yoru application send the frist events you will be ready to create your badges, points and levels
+
 - Instantiate a Gioco object inside you javascript code, passing your [Application Token](http://app.gioco.pro) (that you get after regiter on Gioco Pro) as a string argument
 
 ```javascript
