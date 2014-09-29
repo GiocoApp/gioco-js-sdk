@@ -29,7 +29,7 @@ A easy way to implement gamification based on plug and play concept. Doesn't mat
 - Instantiate a Gioco object inside you javascript code, passing your [Application Token](http://app.gioco.pro) (that you get after regiter on Gioco Pro) as a string argument
 
 ```javascript
-gioco = new Gioco('YOUR TOKEN HERE')
+gioco = new Gioco('YOUR TOKEN HERE');
 ```
 
 Now you are ready to use this instance to make as many requests as you want to Gioco API.
@@ -44,8 +44,8 @@ Gioco instance have an method called **getResource**, it expect an integer argum
 Examples:
 
 ```javascript
-gioco = new Gioco('YOUR TOKEN HERE')
-gioco.getResource(1)
+gioco = new Gioco('YOUR TOKEN HERE');
+gioco.getResource(1);
 ```
 
 ## Events
@@ -62,8 +62,8 @@ Gioco instance have an method called **trackEvent**, it expect two arguments, th
 Examples:
 
 ```javascript
-gioco = new Gioco('YOUR TOKEN HERE')
-gioco.trackEvent('login', 1)
+gioco = new Gioco('YOUR TOKEN HERE');
+gioco.trackEvent('login', 1);
 ```
 
 ## Ranking
@@ -76,6 +76,7 @@ Gioco instance have an method called **getRanking**, it expect two integer argum
 Examples:
 
 ```javascript
-gioco = new Gioco('YOUR TOKEN HERE')
-gioco.getResource(1)
+gioco = new Gioco('YOUR TOKEN HERE');
+gioco.getRanking(); // default size = 100 and batch = 1
+gioco.getRanking(50, 2); // specifing size = 50 and batch = 2
 ```
