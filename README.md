@@ -1,6 +1,6 @@
 ![Alt text](http://gioco.pro/wp-content/uploads/2014/09/logo_small2.png "A gamification js sdk Gioco Pro")
 
-# Gioco Pro (current version - 0.0.1)
+# Gioco Pro (current version - 0.0.2)
 Gioco Pro JS SDK integrate with [Gioco Pro service](http://www.gioco.pro)
 A easy way to implement gamification based on plug and play concept. Doesn't matter if you already have a full and functional database, Gioco will smoothly integrate everything and provide all methods and analytics that you might need.
 
@@ -64,4 +64,18 @@ Examples:
 ```javascript
 gioco = new Gioco('YOUR TOKEN HERE')
 gioco.trackEvent('login', 1)
+```
+
+## Ranking
+
+### Get Ranking
+**getRanking** *(size: ```Integer```(default: 100), batch: ```Integer```(default: 1))*
+
+Gioco instance have an method called **getRanking**, it expect two integer arguments representing the size of each batch (the max number is 100) and the batch you want to acces, those arguments are intended to paginate the ranking.
+
+Examples:
+
+```javascript
+gioco = new Gioco('YOUR TOKEN HERE')
+gioco.getResource(1)
 ```
