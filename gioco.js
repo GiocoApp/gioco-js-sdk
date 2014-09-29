@@ -4,7 +4,7 @@ var Gioco;
 Gioco = (function() {
   function Gioco(token) {
     this.options = {
-      url: 'http://localhost:3000/api/',
+      url: 'http://app.gioco.pro/api/',
       headers: {
         token: token
       }
@@ -17,6 +17,14 @@ Gioco = (function() {
       url: 'get_resource.json'
     };
     return this.sendRequest(params, aid, 'get');
+  };
+
+  Gioco.prototype.getRanking = function() {
+    var params;
+    params = {
+      url: 'ranking/retrieve.json'
+    };
+    return this.sendRequest(params, null, 'get');
   };
 
   Gioco.prototype.trackEvent = function(name, aid) {
@@ -44,7 +52,9 @@ Gioco = (function() {
   Gioco.prototype.sendRequest = function(params, aid, type) {
     params.url = this.options.url + params.url;
     params.type = type;
-    params.data = this.mountResourceRequest(params.data, aid);
+    if (aid) {
+      params.data = this.mountResourceRequest(params.data, aid);
+    }
     params.headers = {
       Token: this.options.headers.token
     };
