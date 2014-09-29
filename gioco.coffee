@@ -10,6 +10,11 @@ class Gioco
       url: 'get_resource.json',
     @sendRequest(params, aid, 'get')
 
+  getRanking: ->
+    params =
+      url: 'ranking/retrieve.json',
+    @sendRequest(params, null, 'get')
+
   trackEvent: (name, aid) ->
     data = {event:{name:name}}
     params =
@@ -25,6 +30,6 @@ class Gioco
   sendRequest: (params, aid, type) ->
     params.url     = @options.url + params.url
     params.type    = type
-    params.data    = @mountResourceRequest(params.data, aid)
+    params.data    = @mountResourceRequest(params.data, aid) if aid
     params.headers = {Token: @options.headers.token}
     $.ajax params
