@@ -19,10 +19,21 @@ Gioco = (function() {
     return this.sendRequest(params, aid, 'get');
   };
 
-  Gioco.prototype.getRanking = function() {
-    var params;
+  Gioco.prototype.getRanking = function(size, batch) {
+    var data, params;
+    if (size == null) {
+      size = 100;
+    }
+    if (batch == null) {
+      batch = 1;
+    }
+    data = {
+      size: size,
+      batch: batch
+    };
     params = {
-      url: 'ranking/retrieve.json'
+      url: 'ranking/retrieve.json',
+      data: data
     };
     return this.sendRequest(params, null, 'get');
   };
@@ -43,18 +54,18 @@ Gioco = (function() {
 
   Gioco.prototype.mountResourceRequest = function(data, aid) {
     data = data === void 0 ? {} : data;
-    data.resource = {
-      aid: aid
-    };
+    if (aid) {
+      data.resource = {
+        aid: aid
+      };
+    }
     return data;
   };
 
   Gioco.prototype.sendRequest = function(params, aid, type) {
     params.url = this.options.url + params.url;
     params.type = type;
-    if (aid) {
-      params.data = this.mountResourceRequest(params.data, aid);
-    }
+    params.data = this.mountResourceRequest(params.data, aid);
     params.headers = {
       Token: this.options.headers.token
     };
