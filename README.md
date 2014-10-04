@@ -6,7 +6,7 @@ A easy way to implement gamification based on plug and play concept. Doesn't mat
 
 ## Installation
 
-#**Gioco Pro** is available to download [GitHub](https://app.gioco.pro/assets/gioco-sdk-min.js)
+#**Gioco Pro** is available to [Download](https://app.gioco.pro/assets/gioco-sdk-min.js)
 
 - First of all you need to download Gioco JS SDK, you can do this clicking on the download button above.
 - Add the gioco-sdk-min.js file to your project and load it inside the <head> tag
