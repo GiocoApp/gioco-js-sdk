@@ -1,7 +1,7 @@
 class Gioco
   constructor: (token) ->
     @options =
-      url: 'http://app.gioco.pro/api/',
+      url: 'https://app.gioco.pro/api/',
       headers:
         token: token
 
