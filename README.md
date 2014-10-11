@@ -1,6 +1,6 @@
 ![Alt text](http://gioco.pro/wp-content/uploads/2014/09/logo_small2.png "A gamification js sdk Gioco Pro")
 
-# Gioco Pro (current version - 0.0.3)
+# Gioco Pro (current version - 0.1.3)
 Gioco Pro JS SDK integrate with [Gioco Pro service](http://www.gioco.pro)
 A easy way to implement gamification based on plug and play concept. Doesn't matter if you already have a full and functional database, Gioco will smoothly integrate everything and provide all methods and analytics that you might need.
 
