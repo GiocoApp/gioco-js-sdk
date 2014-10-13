@@ -19,9 +19,8 @@ A easy way to implement gamification based on plug and play concept. Doesn't mat
 
 -----------
 
-## You can already access your dashboard at [Gioco Pro](http://app.gioco.pro) and start to setup you application. It has it's own tutorial and is quite simple!
-
-### After yoru application send the frist events you will be ready to create your badges, points and levels
+### You can already access your dashboard at [Gioco Pro](http://app.gioco.pro) and start to setup you application. It has it's own tutorial and is quite simple!
+(After your application send the frist events you will be ready to create your badges, points and levels)
 
 -----------
 
@@ -33,6 +32,8 @@ gioco = new Gioco('YOUR TOKEN HERE');
 ```
 
 Now you are ready to use this instance to make as many requests as you want to Gioco API.
+
+*All method supports anonymity, if you don't send ans specific user id, it will store the data based on a cookie. Once you send that user id it will be automaticly merged into the old data.*
 
 ## Resource
 
