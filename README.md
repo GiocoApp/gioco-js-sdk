@@ -26,7 +26,7 @@ A easy way to implement gamification based on plug and play concept. Doesn't mat
 
 - Instantiate a Gioco object inside you javascript code, passing your [Application Token](http://app.gioco.pro) (that you get after regiter on Gioco Pro) as a string argument
 
-- *All method supports **anonymity**, if you don't send ans specific user id, it will store the data based on a cookie. Once you send that user id it will be automaticly merged into the old data.*
+- All method supports **anonymity**, if you don't send ans specific user id, it will store the events and gamification data based on a cookie. **Once you send that user id it will be automaticly merged into the old data.**
 
 ```javascript
 gioco = new Gioco('YOUR TOKEN HERE');
