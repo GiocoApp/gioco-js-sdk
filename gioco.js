@@ -3,7 +3,7 @@ var Gioco;
 Gioco = (function() {
   function Gioco(token) {
     this.options = {
-      url: 'http://localhost:3000/api/',
+      url: 'http://app.gioco.pro/api/',
       headers: {
         token: window.giocoSettings ? window.giocoSettings.token : token
       }
