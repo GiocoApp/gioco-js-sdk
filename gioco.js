@@ -3,9 +3,9 @@ var Gioco;
 Gioco = (function() {
   function Gioco(token) {
     this.options = {
-      url: 'https://app.gioco.pro/api/',
+      url: 'http://localhost:3000/api/',
       headers: {
-        token: token
+        token: window.giocoSettings ? window.giocoSettings.token : token
       }
     };
   }
@@ -74,13 +74,27 @@ Gioco = (function() {
   };
 
   Gioco.prototype.sendRequest = function(params, aid, type) {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+      xmlhttp = new XMLHttpRequest();
+    } else {
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
     params.url = this.options.url + params.url;
-    params.type = type;
     params.data = this.mountResourceRequest(params.data, aid);
-    params.headers = {
-      Token: this.options.headers.token
-    };
-    return $.ajax(params);
+    if (type === 'get') {
+      xmlhttp.open(type, params.url + '?' + this.convertToRequest(params.data), false);
+      xmlhttp.setRequestHeader("Token", this.options.headers.token);
+      xmlhttp.send();
+    } else if (type === 'post') {
+      xmlhttp.open(type, params.url, false);
+      xmlhttp.setRequestHeader("Token", this.options.headers.token);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.send(JSON.stringify(params.data));
+    }
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+      return JSON.parse(xmlhttp.responseText);
+    }
   };
 
   Gioco.prototype.createCookie = function(name, value, days) {
@@ -109,6 +123,23 @@ Gioco = (function() {
       }
     }
     return null;
+  };
+
+  Gioco.prototype.convertToRequest = function(content) {
+    var key, request, subkey, subval, val;
+    request = "";
+    for (key in content) {
+      val = content[key];
+      if (key === 'resource' || key === 'event') {
+        for (subkey in val) {
+          subval = val[subkey];
+          request += "" + key + "[" + subkey + "]=" + subval + "&";
+        }
+      } else {
+        request += "" + key + "=" + val + "&";
+      }
+    }
+    return request;
   };
 
   Gioco.prototype.rand = function() {

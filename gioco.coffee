@@ -1,9 +1,9 @@
 class Gioco
   constructor: (token) ->
     @options =
-      url: 'https://app.gioco.pro/api/',
+      url: 'http://localhost:3000/api/',
       headers:
-        token: token
+        token: if window.giocoSettings then window.giocoSettings.token else token
 
   getResource: (aid) ->
     params =
@@ -38,11 +38,26 @@ class Gioco
     data
 
   sendRequest: (params, aid, type) ->
-    params.url     = @options.url + params.url
-    params.type    = type
-    params.data    = @mountResourceRequest(params.data, aid)
-    params.headers = {Token: @options.headers.token}
-    $.ajax params
+    if window.XMLHttpRequest
+      xmlhttp = new XMLHttpRequest()
+    else
+      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+
+    params.url  = @options.url + params.url
+    params.data = @mountResourceRequest(params.data, aid)
+
+    if type == 'get'
+      xmlhttp.open(type, params.url + '?' + @convertToRequest(params.data), false);
+      xmlhttp.setRequestHeader("Token", @options.headers.token);
+      xmlhttp.send();
+    else if type == 'post'
+      xmlhttp.open(type, params.url, false);
+      xmlhttp.setRequestHeader("Token", @options.headers.token);
+      xmlhttp.setRequestHeader("Content-Type", "application/json");
+      xmlhttp.send(JSON.stringify(params.data));
+
+    if xmlhttp.readyState==4 && xmlhttp.status==200
+      JSON.parse xmlhttp.responseText
 
   createCookie: (name, value, days) ->
     if days
@@ -64,6 +79,16 @@ class Gioco
           c_end = document.cookie.length
           return unescape(document.cookie.substring(c_start, c_end));
     return null
+
+  convertToRequest: (content) ->
+    request  = ""
+    for key, val of content
+      if key == 'resource' || key == 'event'
+        for subkey, subval of val
+          request += "#{key}[#{subkey}]=#{subval}&"
+      else
+        request += "#{key}=#{val}&"
+    return request
 
   rand: ->
     CryptoJS.MD5(Math.random().toString(36).substr(2) + navigator["appCodeName"] + navigator["appName"] + navigator["appVersion"] + navigator["userAgent"] + navigator["platform"] + Math.random().toString(36).substr(2)).toString()
